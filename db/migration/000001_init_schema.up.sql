@@ -1,4 +1,3 @@
-CREATE SCHEMA [IF NOT EXISTS] simple_bank;
 CREATE TABLE "accounts" (
   "id" bigserial PRIMARY KEY,
   "owner" varchar NOT NULL,
