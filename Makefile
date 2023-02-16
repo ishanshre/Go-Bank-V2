@@ -22,4 +22,7 @@ closeDocker:
 dlog:
 	docker-compose logs
 
+sqlcGen:
+	sqlc generate
+
 .PHONY: migrateUp migrateDown buildDocker runDocker closeDocker dlog
