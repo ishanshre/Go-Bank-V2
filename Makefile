@@ -25,4 +25,6 @@ dlog:
 sqlcGen:
 	sqlc generate
 
-.PHONY: migrateUp migrateDown buildDocker runDocker closeDocker dlog
+test:
+	go test -v -cover ./db/sqlc
+.PHONY: migrateUp migrateDown buildDocker runDocker closeDocker dlog test
