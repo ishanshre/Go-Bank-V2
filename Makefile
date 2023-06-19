@@ -10,6 +10,12 @@ migrateUp:
 migrateDown:
 	migrate -path db/migration -database "${DB_URL}" -verbose down
 
+migrateForce: 
+	migrate -path migrations -database "${DB_URL}" force $(version)
+
+migrateCreate:
+	migrate create -ext sql -dir migrations -seq $(fileName)
+
 buildDocker:
 	docker-compose up --build
 
@@ -26,5 +32,5 @@ sqlcGen:
 	sqlc generate
 
 test:
-	go test -v -cover ./db/sqlc
+	go test -v -cover ./...
 .PHONY: migrateUp migrateDown buildDocker runDocker closeDocker dlog test

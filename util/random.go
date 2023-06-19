@@ -14,7 +14,7 @@ func Init() {
 
 func RandomInt(min, max int64) int64 {
 	// returns a random integer between min and max
-	return min + rand.Int63n(max-min+1)
+	return min + rand.Int63n(max-min+1) // min -> max-min+min
 }
 
 func RandomString(n int) string {
