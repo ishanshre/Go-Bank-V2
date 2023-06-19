@@ -11,16 +11,16 @@ import (
 
 func createRandomTransfer(t *testing.T, account1, account2 Account) Transfer {
 	args := CreateTransferParams{
-		FromAccountsID: account1.ID,
-		ToAccountsID:   account2.ID,
-		Amount:         util.RandomMoney(),
+		FromAccountID: account1.ID,
+		ToAccountID:   account2.ID,
+		Amount:        util.RandomMoney(),
 	}
 	transfer, err := testQueries.CreateTransfer(context.Background(), args)
 	require.NoError(t, err)
 	require.NotEmpty(t, transfer)
 
-	require.Equal(t, args.FromAccountsID, transfer.FromAccountsID)
-	require.Equal(t, args.ToAccountsID, transfer.ToAccountsID)
+	require.Equal(t, args.FromAccountID, transfer.FromAccountID)
+	require.Equal(t, args.ToAccountID, transfer.ToAccountID)
 
 	require.NotZero(t, transfer.ID)
 	require.NotZero(t, transfer.CreatedAt)
@@ -43,8 +43,8 @@ func TestGetTransfer(t *testing.T) {
 	require.NotEmpty(t, transfer2)
 
 	require.Equal(t, transfer1.ID, transfer2.ID)
-	require.Equal(t, transfer1.FromAccountsID, transfer2.FromAccountsID)
-	require.Equal(t, transfer1.ToAccountsID, transfer2.ToAccountsID)
+	require.Equal(t, transfer1.FromAccountID, transfer2.FromAccountID)
+	require.Equal(t, transfer1.ToAccountID, transfer2.ToAccountID)
 	require.Equal(t, transfer1.Amount, transfer2.Amount)
 	require.WithinDuration(t, transfer1.CreatedAt, transfer2.CreatedAt, time.Second)
 }
@@ -59,10 +59,10 @@ func TestListTransfer(t *testing.T) {
 	}
 
 	arg := ListTransfersParams{
-		FromAccountsID: account1.ID,
-		ToAccountsID:   account1.ID,
-		Limit:          5,
-		Offset:         5,
+		FromAccountID: account1.ID,
+		ToAccountID:   account1.ID,
+		Limit:         5,
+		Offset:        5,
 	}
 
 	transfers, err := testQueries.ListTransfers(context.Background(), arg)
@@ -71,6 +71,6 @@ func TestListTransfer(t *testing.T) {
 
 	for _, transfer := range transfers {
 		require.NotEmpty(t, transfer)
-		require.True(t, transfer.FromAccountsID == account1.ID || transfer.ToAccountsID == account1.ID)
+		require.True(t, transfer.FromAccountID == account1.ID || transfer.ToAccountID == account1.ID)
 	}
 }
